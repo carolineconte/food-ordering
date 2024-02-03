@@ -11,6 +11,14 @@ section.hero{
   @apply border w-full p-2 rounded-xl outline-none focus:ring-2 focus:bg-gray-100/20 focus:text-white  ;
 }
 
+.input:disabled{
+  @apply bg-gray-200 cursor-not-allowed;
+}
+
 .btn{
   @apply border border-gray-300 w-auto px-4 py-2 mx-auto mt-4 rounded-lg text-white font-semibold text-lg;
+}
+
+.btn:disabled{
+  @apply cursor-not-allowed bg-primaryHover;
 }
