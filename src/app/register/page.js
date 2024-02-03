@@ -12,6 +12,7 @@ export default function Register() {
   const [errors, setErrors] = useState(null)
   const [creatingUser, setCreatingUser] = useState(false);
   const [userCreated, setUserCreated] = useState(false)
+  const [error, setError] = useState('')
 
   const validate = (data) => {
     const errors = {};
@@ -42,15 +43,24 @@ export default function Register() {
 
     setCreatingUser(true)
 
-    await fetch('/api/register', {
-      method: 'POST',
-      body: JSON.stringify(user),
-      headers: { 'Content-Type': 'application/json' }
-    })
+    try {
+      const res = await fetch('/api/register', {
+        method: 'POST',
+        body: JSON.stringify(user),
+        headers: { 'Content-Type': 'application/json' }
+      })
 
-    setCreatingUser(false)
-    setUserCreated(true)
-    setErrors(null)
+      if (res.ok) {
+        setCreatingUser(false),
+          setUserCreated(true),
+          setErrors(null)
+      } else {
+        setError('Something went bad! please try later')
+      }
+
+    } catch (e) {
+      console.log(e)
+    }
   }
 
   return (
@@ -68,6 +78,9 @@ export default function Register() {
             </Link>
           </div>
         )}
+        {error && (
+          <small className="text-xs text-red-500 mt-1 pl-2">{error}</small>
+        )}
         <input className="input" type="email" name="" placeholder="Email"
           value={email} onChange={e => setEmail(e.target.value)}
           disabled={creatingUser}
@@ -80,16 +93,22 @@ export default function Register() {
         />
         {errors?.password && <small className="text-xs text-red-500 mt-1 pl-2">{errors?.password}</small>}
 
-        <button className="btn block bg-primary hover:bg-primaryHover transition"
+        <button className="btn block mt-4 bg-primary hover:bg-primaryHover transition"
           disabled={creatingUser}
         >
           Continua</button>
 
-        <div className="my-4 text-center text-gray-50">o accedi con provider</div>
+        <div className="mt-8 text-center text-gray-50">o accedi con provider</div>
+        
         <button className="btn flex gap-4 hover:bg-white/30 transition">
           <Image src='/googleLogo.png' alt="Logo Google" width={24} height={24} />
           Accedi con Google
         </button>
+
+        <p className="text-gray-50 mt-4 text-center ">
+          Disponi già di un account? {''}
+          <Link className="underline text-lg font-bold" href='/login'>Accedi &raquo;</Link>
+          </p>
       </form>
     </section>
   )
