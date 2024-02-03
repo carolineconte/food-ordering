@@ -1,20 +1,19 @@
 'use client';
-
+//1691Metron
 import Image from "next/image";
 import { useState } from "react";
 
 export default function Register() {
-  
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   function handleFormSubmit(e) {
     e.preventDefault();
-
     fetch('/api/register', {
       method: 'POST',
       body: JSON.stringify({ email, password }),
-      headers:{'Content-Type': 'application/json'}
+      headers: { 'Content-Type': 'application/json' }
     })
 
   }
