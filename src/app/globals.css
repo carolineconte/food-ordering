@@ -16,7 +16,7 @@ section.hero{
 }
 
 .btn{
-  @apply border border-gray-300 w-auto px-4 py-2 mx-auto mt-4 rounded-lg text-white font-semibold text-lg;
+  @apply border border-gray-300 w-auto px-4 py-2 mx-auto rounded-lg text-white font-semibold text-lg;
 }
 
 .btn:disabled{
