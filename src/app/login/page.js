@@ -15,7 +15,11 @@ export default function LoginPage() {
     e.preventDefault();
     setLoading(true);
     //fazer as credenciais assim por seguranca
-    await signIn('credentials', { email, password, callbackUrl: '/' });
+    try {
+      await signIn('credentials', { email, password, callbackUrl: '/' });
+    } catch (error) {
+      console.log(error)
+    }
     //calback redireciona para homepage
     setLoading(false)
   }
@@ -48,9 +52,8 @@ export default function LoginPage() {
 
 
         <div className="mt-8 text-center text-gray-50">o accedi con provider</div>
-        <button type="button" className="btn flex gap-4 hover:bg-white/30 transition"
-          onClick={() => signIn('google')}
-        >
+        <button type="button" onClick={() => signIn('google', { callbackUrl: '/' })}
+          className="btn flex gap-4 hover:bg-white/30 transition" >
           <Image src='/googleLogo.png' alt="Logo Google" width={24} height={24} />
           Accedi con Google
         </button>

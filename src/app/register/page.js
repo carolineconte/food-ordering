@@ -66,7 +66,6 @@ export default function Register() {
 
   return (
     <section className="flex-grow flex items-center">
-
       <form className="flex flex-col gap-2 m-auto w-3/5 max-w-md px-10 py-14 rounded-3xl  bg-secondary shadow-lg"
         onSubmit={handleFormSubmit}>
         <h1 className="text-white/90 mb-6 uppercase text-center text-3xl">Creare account</h1>
@@ -84,14 +83,12 @@ export default function Register() {
         )}
         <input className="input" type="email" name="" placeholder="Email"
           value={email} onChange={e => setEmail(e.target.value)}
-          disabled={creatingUser}
-        />
+          disabled={creatingUser}/>
         {errors?.email && <small className="text-xs text-red-500 mt-1 pl-2">{errors?.email}</small>}
 
         <input className="input mt-4" type="password" name="" id="" placeholder="Password"
           value={password} onChange={e => setPassword(e.target.value)}
-          disabled={creatingUser}
-        />
+          disabled={creatingUser}/>
         {errors?.password && <small className="text-xs text-red-500 mt-1 pl-2">{errors?.password}</small>}
 
         <button className="btn block mt-4 bg-primary hover:bg-primaryHover transition"
@@ -102,8 +99,7 @@ export default function Register() {
         <div className="mt-8 text-center text-gray-50">o accedi con provider</div>
         
         <button type="button" className="btn flex gap-4 hover:bg-white/30 transition"
-        onClick={() => signIn('google', {callbackUrl:'/'})}
-        >
+        onClick={() => signIn('google', {callbackUrl:'/'})}>
           <Image src='/googleLogo.png' alt="Logo Google" width={24} height={24} />
           Accedi con Google
         </button>
