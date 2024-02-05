@@ -13,7 +13,7 @@ export default function Hero() {
         </h1>
 
         <div className="sm:hidden">
-          <Image src={'/pizza.png'} alt={"pizza"} width={500} height={100} objectFit="contain" />
+          <Image src={'/pizza.png'} alt={"pizza"} width={500} height={100} />
         </div>
 
         <p className="selection:my-4 text-gray-500 text-base
@@ -33,7 +33,8 @@ export default function Hero() {
         </div>
       </div>
       <div className="hidden relative sm:flex items-center ">
-        <Image src={'/pizza.png'} alt={"pizza"} layout="fill" objectFit="contain" />
+        <Image src={'/pizza.png'} alt={"pizza"} quality={90}
+         className="w-full" width={200} height={200}/>
       </div>
 
     </section>

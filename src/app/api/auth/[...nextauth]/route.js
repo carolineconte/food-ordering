@@ -9,12 +9,15 @@ import clientPromise from "../../../../libs/mongoConnect";
 
 const handler = NextAuth({
   secret: process.env.SECRET,
+
   adapter: MongoDBAdapter(clientPromise),
+  
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET
     }),
+
     CredentialsProvider({
       name: 'Credentials',
       id: 'credentials',
@@ -29,11 +32,12 @@ const handler = NextAuth({
         const password = credentials?.password
         
         // Conectar com database
-        mongoose.connect(process.env.MONGO_URL)
+        mongoose.connect(process.env.MONGOURL)
         //encontrar o usuario
         const user = await User.findOne({ email })
         //comparar a senha criptografada
         const passwordConf = bcrypt.compareSync(password, user.password)
+
         if (passwordConf) {
           return user
         }
