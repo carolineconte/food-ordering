@@ -1,5 +1,4 @@
 'use client';
-import { signIn } from "next-auth/react";
 //1691Metron
 import Image from "next/image";
 import Link from "next/link";
@@ -92,9 +91,9 @@ export default function Register() {
         {errors?.password && <small className="text-xs text-red-500 mt-1 pl-2">{errors?.password}</small>}
 
         <button className="btn block mt-4 bg-primary hover:bg-primaryHover transition"
-          disabled={creatingUser}>
-          Continua
-          </button>
+          disabled={creatingUser}
+        >
+          Continua</button>
 
         <div className="mt-8 text-center text-gray-50">o accedi con provider</div>
         
