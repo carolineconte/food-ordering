@@ -8,7 +8,7 @@ section.hero{
 }
 
 .input{
-  @apply border w-full p-2 rounded-xl outline-none focus:ring-2 focus:bg-gray-100/20 focus:text-white  ;
+  @apply border w-full p-2 rounded-xl outline-none focus:ring-2 focus:bg-gray-100/20;
 }
 
 .input:disabled{
@@ -16,7 +16,7 @@ section.hero{
 }
 
 .btn{
-  @apply border border-gray-300 w-auto px-4 py-2 mx-auto rounded-lg text-white font-semibold text-lg;
+  @apply border border-gray-300 w-auto px-4 py-2 mx-auto rounded-lg font-semibold text-lg;
 }
 
 .btn:disabled{

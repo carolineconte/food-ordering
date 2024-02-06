@@ -15,11 +15,7 @@ export default function LoginPage() {
     e.preventDefault();
     setLoading(true);
     //fazer as credenciais assim por seguranca
-    try {
-      await signIn('credentials', { email, password, callbackUrl: '/' });
-    } catch (error) {
-      console.log(error)
-    }
+    await signIn('credentials', { email, password });
     //calback redireciona para homepage
     setLoading(false)
   }
@@ -30,7 +26,8 @@ export default function LoginPage() {
       <form className="flex flex-col gap-2 m-auto w-3/5 max-w-md px-10 py-14 rounded-3xl bg-secondary shadow-lg"
         onSubmit={handleFormSubmit}>
         <h1 className="text-white/90 mb-6 uppercase text-center text-3xl">
-          Accedi</h1>
+          Accedi
+        </h1>
 
         {error && (<small className="text-xs text-red-500 mt-1 pl-2">{error}</small>)}
 
@@ -45,15 +42,15 @@ export default function LoginPage() {
         />
 
         <button className="btn block mt-4 bg-primary hover:bg-primaryHover transition"
-          disabled={loading}
-        >
+          disabled={loading}>
           Continua
         </button>
 
 
         <div className="mt-8 text-center text-gray-50">o accedi con provider</div>
-        <button type="button" onClick={() => signIn('google', { callbackUrl: '/' })}
-          className="btn flex gap-4 hover:bg-white/30 transition" >
+        <button type="button" className="btn flex gap-4 hover:bg-white/30 transition"
+          onClick={() => signIn('google')}
+        >
           <Image src='/googleLogo.png' alt="Logo Google" width={24} height={24} />
           Accedi con Google
         </button>

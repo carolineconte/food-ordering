@@ -26,10 +26,10 @@ export default function Hero() {
             Order now
             <Right />
           </button>
-          {/* <button className="flex gap-2 py-2 text-gray-500 font-semibold">
+          <button className="flex gap-2 py-2 text-gray-500 font-semibold">
             Learn more
             <Right />
-          </button> */}
+          </button>
         </div>
       </div>
       <div className="hidden relative sm:flex items-center ">
