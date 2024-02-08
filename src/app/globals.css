@@ -22,3 +22,11 @@ section.hero{
 .btn:disabled{
   @apply cursor-not-allowed bg-primaryHover;
 }
+
+.tabs a {
+  @apply bg-slate-200 px-4 py-2 rounded-full text-secondary font-semibold text-lg hover:bg-secondaryHover hover:text-white;
+}
+
+div.tabs > *.active{
+  @apply bg-secondary text-white tracking-wide;
+}

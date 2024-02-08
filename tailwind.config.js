@@ -11,6 +11,7 @@ module.exports = {
       primary: '#E1123C',
       primaryHover: '#9B0322',
       secondary: '#005743',
+      secondaryHover: '#033B2E',
       backgorund: '#F5EDEC'
      }
     },

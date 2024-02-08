@@ -26,7 +26,7 @@ export default function LoginPage() {
       <form className="flex flex-col gap-2 m-auto w-3/5 max-w-md px-10 py-14 rounded-3xl bg-secondary shadow-lg"
         onSubmit={handleFormSubmit}>
         <h1 className="text-white/90 mb-6 uppercase text-center text-3xl">
-          Accedi
+          Effettua Il Login
         </h1>
 
         {error && (<small className="text-xs text-red-500 mt-1 pl-2">{error}</small>)}
@@ -41,14 +41,14 @@ export default function LoginPage() {
           disabled={loading}
         />
 
-        <button className="btn block mt-4 bg-primary hover:bg-primaryHover transition"
+        <button className="btn block mt-4 text-white bg-primary hover:bg-primaryHover transition"
           disabled={loading}>
-          Continua
+          Accedi
         </button>
 
 
         <div className="mt-8 text-center text-gray-50">o accedi con provider</div>
-        <button type="button" className="btn flex gap-4 hover:bg-white/30 transition"
+        <button type="button" className="btn flex gap-4 text-white hover:bg-white/30 transition"
           onClick={() => signIn('google')}
         >
           <Image src='/googleLogo.png' alt="Logo Google" width={24} height={24} />
@@ -56,8 +56,8 @@ export default function LoginPage() {
         </button>
 
         <p className="text-gray-50 mt-8 text-center ">
-          Sei nuovo su Fiorela? <br />
-          <Link className="underline text-lg font-bold" href='/login'>Crea il tuo account &raquo;</Link>
+          Sei un nuovo utente? <br />
+          <Link className="underline text-lg font-bold" href='/register'>Registrati &raquo;</Link>
         </p>
       </form>
     </section>

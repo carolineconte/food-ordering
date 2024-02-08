@@ -6,10 +6,6 @@ const UserSchema = new Schema({
   image: { type: String },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-  phone: { type: String },
-  city: { type: String },
-  postalCode: { type: String },
-  country: { type: String }
 }, { timestamps: true })
 
 UserSchema.post('validate', function (user) {

@@ -1,9 +1,9 @@
 'use client';
-//1691Metron
+
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-
+import { signIn } from "next-auth/react";
 
 export default function Register() {
 
@@ -55,7 +55,7 @@ export default function Register() {
           setUserCreated(true),
           setErrors(null)
       } else {
-        setError('Something went bad! please try later')
+        setError('Si é verificato un problema. Riprova più tardi.')
       }
 
     } catch (e) {
@@ -67,7 +67,7 @@ export default function Register() {
     <section className="flex-grow flex items-center">
       <form className="flex flex-col gap-2 m-auto w-3/5 max-w-md px-10 py-14 rounded-3xl  bg-secondary shadow-lg"
         onSubmit={handleFormSubmit}>
-        <h1 className="text-white/90 mb-6 uppercase text-center text-3xl">Creare account</h1>
+        <h1 className="text-white/90 mb-6 uppercase text-center text-3xl">Registrazione</h1>
         {userCreated && (
           <div className="text-white my-4 text-center text-lg">
             User created. <br />
@@ -82,23 +82,25 @@ export default function Register() {
         )}
         <input className="input" type="email" name="" placeholder="Email"
           value={email} onChange={e => setEmail(e.target.value)}
-          disabled={creatingUser}/>
+          disabled={creatingUser} />
         {errors?.email && <small className="text-xs text-red-500 mt-1 pl-2">{errors?.email}</small>}
 
         <input className="input mt-4" type="password" name="" id="" placeholder="Password"
           value={password} onChange={e => setPassword(e.target.value)}
-          disabled={creatingUser}/>
+          disabled={creatingUser} />
         {errors?.password && <small className="text-xs text-red-500 mt-1 pl-2">{errors?.password}</small>}
 
-        <button className="btn block mt-4 bg-primary hover:bg-primaryHover transition"
-          disabled={creatingUser}
-        >
-          Continua</button>
+        <button className="btn block mt-4 text-white bg-primary hover:bg-primaryHover transition"
+          disabled={creatingUser}>
+          Registrati
+        </button>
 
-        <div className="mt-8 text-center text-gray-50">o accedi con provider</div>
-        
-        <button type="button" className="btn flex gap-4 hover:bg-white/30 transition"
-        onClick={() => signIn('google', {callbackUrl:'/'})}>
+        <div className="mt-8 text-center text-gray-50">
+          o accedi con provider
+        </div>
+
+        <button type="button" className="btn flex gap-4 text-white hover:bg-white/30 transition"
+          onClick={() => signIn('google', { callbackUrl: '/' })}>
           <Image src='/googleLogo.png' alt="Logo Google" width={24} height={24} />
           Accedi con Google
         </button>
@@ -106,7 +108,7 @@ export default function Register() {
         <p className="text-gray-50 mt-4 text-center ">
           Disponi già di un account? {''}
           <Link className="underline text-lg font-bold" href='/login'>Accedi &raquo;</Link>
-          </p>
+        </p>
       </form>
     </section>
   )

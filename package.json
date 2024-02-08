@@ -9,8 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@auth/mongodb-adapter": "^2.3.2",
     "@aws-sdk/client-s3": "^3.504.0",
     "bcrypt": "^5.1.1",
+    "mongodb": "^6.3.0",
     "mongoose": "^8.1.1",
     "next": "14.1.0",
     "next-auth": "^4.24.5",
