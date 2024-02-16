@@ -2,7 +2,7 @@ import { SectionHeaders } from "./SectionHeaders"
 
 export const Contact = () => {
   return (
-    <section>
+    <section id="contact">
       <SectionHeaders
         mainHeader={'Contatti'}
         subHeader={'Se hai bisogno di noi, puoi chiamarci'}

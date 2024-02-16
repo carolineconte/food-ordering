@@ -1,8 +1,13 @@
 'use client'
-import UserTabs from '@/components/layout/UserTabs';
-import { useEffect, useState } from 'react';
 import UseProfile from '../../components/hooks/UseProfile';
+import UserTabs from '@/components/layout/UserTabs';
+
+import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
+
+import Edit from '@/components/icons/Edit'
+import Trash from '@/components/icons/Trash'
+import DeleteButton from '@/components/DeleteBtn'
 
 export default function Categories() {
 
@@ -16,7 +21,6 @@ export default function Categories() {
     e.preventDefault();
 
     const creationPromise = new Promise(async (resolve, reject) => {
-
       const data = { name: categoryName }
       if (editedCategory) {
         data._id = editedCategory._id
@@ -40,6 +44,24 @@ export default function Categories() {
         error: `Oops! C'è stato un problema, riprova più tardi.`
       })
     })
+  }
+
+  const handleDelete = async (_id) => {
+    const savingPromise = fetch('/api/categories?_id=' + _id, {
+      method: 'DELETE'
+    })
+      .then(res => {
+        if (!res.ok) {
+          throw new Error('Errore durante il salvataggio. Riprova più tardi.');
+        }
+      })
+
+    await toast.promise(savingPromise, {
+      loading: 'Stiamo applicando le tue modifiche, attendi un momento...',
+      success: 'Successo! I tuoi cambiamenti sono stati salvati.',
+      error: `Oops! C'è stato un problema, riprova più tardi.`
+    })
+    fetchCategories()
   }
 
   //Modo de atualizar a lista assim que adicionamos mais uma categoria.
@@ -74,8 +96,7 @@ export default function Categories() {
   return (
     <section className='grow mx-auto my-12 '>
       <UserTabs />
-      
-      <form className='flex gap-2 items-end'onSubmit={handleCategorySubmit}>
+      <form className='flex gap-2 items-end' onSubmit={handleCategorySubmit}>
         <label className='grow'>
           {editedCategory ? 'Modifica Categoria: ' : 'Nuova Categoria:'}
           {editedCategory &&
@@ -83,23 +104,37 @@ export default function Categories() {
           <input type="text" name="" className='input' placeholder='Nome categoria'
             value={categoryName} onChange={e => setCategoryName(e.target.value)} />
         </label>
-        <button className='btn h-fit' type='submit'>
-          {editedCategory ? 'Modifica' : 'Creare'}
+        <button className='btn h-fit hover:bg-gray-300' type='submit'>
+          {editedCategory ? 'Modifica' : 'Aggiungi'}
         </button>
+        {editedCategory && 
+        <button className='btn h-fit hover:bg-gray-300' type='button'
+        onClick={() => {setEditedCategory(null); setCategoryName('')}}>
+          Cancela
+          </button>}
       </form>
 
       <div className='mt-6'>
         <h2 className='text-lg mb-2'>Modifica nome categoria:</h2>
         {
           categories?.length > 0 && categories.map(cat => (
-            <button key={cat._id}
-              onClick={() => {
-                setEditedCategory(cat);
-                setCategoryName(cat.name)
-              }}
-              className='bg-slate-200 mb-2 hover:bg-slate-300/80 w-full px-4 py-2 text-left font-medium text-lg rounded-lg shadow-sm border'>
+            <div key={cat._id} className='w-full flex justify-between items-center my-3 bg-gray-100 p-2 rounded-lg'>
               <span>{cat.name}</span>
-            </button>
+
+              <div className='flex gap-2 items-center'>
+                <button type='button'
+                  className='btn flex bg-secondary text-white'
+                  onClick={() => {
+                    setEditedCategory(cat);
+                    setCategoryName(cat.name)
+                  }}>
+                  <Edit className={'w-4 h-4'} />
+                </button>
+
+                <DeleteButton label={<Trash className={'w-4 h-4'} />} onDelete={() => handleDelete(cat._id)} confirmMsg={"Confermi l'eliminazione di questo piatto?"}/>
+
+              </div>
+            </div>
           ))
         }
       </div>

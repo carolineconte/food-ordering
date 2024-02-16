@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 
-export default function UserTabs() {
+export default function UserTabs({isAdmin = false}) {
   const path = usePathname();
 
   return (
@@ -17,8 +17,11 @@ export default function UserTabs() {
       <Link className={path.includes('menu-items') ? 'active' : ''}
         href={'/menu-items'}>Menu
       </Link>
-      <Link className={path === '/Users' ? 'active' : ''}
-        href={'/Users'}>Users
+      <Link className={path.includes('/users') ? 'active' : ''}
+        href={'/users'}>Users
+      </Link>
+      <Link className={path.includes('/orders') ? 'active' : ''}
+        href={'/orders'}>Orders
       </Link>
     </div>
   )

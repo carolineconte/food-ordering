@@ -1,18 +1,18 @@
-import { useEffect, useState } from 'react';
+import {useEffect, useState} from "react";
 
-export default function UseProfile(){
-
+export default function UseProfile() {
   const [data, setData] = useState(false);
-  const [Loading, setLoading] = useState(true);
-
+  const [loading, setLoading] = useState(true);
+  
   useEffect(() => {
-    fetch('/api/profile').then(res => {
-      res.json().then(data => {
-        setData(data.admin)
-        setLoading(false)
-      })
+    setLoading(true);
+    fetch('/api/profile').then(response => {
+      response.json().then(data => {
+        setData(data);
+        setLoading(false);
+      });
     })
-  }, [])
+  }, []);
 
-  return {Loading, data}
+  return {loading, data};
 }

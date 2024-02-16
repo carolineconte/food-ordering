@@ -30,3 +30,15 @@ section.hero{
 div.tabs > *.active{
   @apply bg-secondary text-white tracking-wide;
 }
+
+.table{
+  @apply w-full my-3 grid grid-cols-[auto_200px_50px] gap-6 items-center;
+}
+
+.extras{
+  @apply border-2 w-full p-2 rounded-lg mt-4;
+}
+
+.extrasInput{
+  @apply flex w-full gap-2 border my-1 p-2 rounded-lg hover:bg-gray-100 cursor-pointer;
+}

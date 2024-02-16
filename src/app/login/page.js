@@ -52,7 +52,7 @@ export default function LoginPage() {
           onClick={() => signIn('google')}
         >
           <Image src='/googleLogo.png' alt="Logo Google" width={24} height={24} />
-          Accedi con Google
+          Oppure con
         </button>
 
         <p className="text-gray-50 mt-8 text-center ">

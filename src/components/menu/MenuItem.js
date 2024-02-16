@@ -1,18 +1,124 @@
-import React from 'react'
+'use client'
+import { useContext, useState } from 'react'
+import { CartContext } from '../AppContext'
+import MenuItemTile from '@/components/menu/menuItemTile'
+import BtnAggCarrello from '@/components/menu/BtnAggCarrello'
+import CloseIcon from '@/components/icons/CloseIcon'
+import toast from 'react-hot-toast'
 
-export const MenuItem = () => {
+
+export const MenuItem = ({ item }) => {
+
+  const { _id, name, description, image, basePrice, sizes, extraIngredients } = item;
+  const { addToCart } = useContext(CartContext);
+  const [selectedSize, setSelectedSize] = useState(sizes?.[0] || null);
+  const [selectedExtras, setSelectedExtras] = useState([]);
+  const [showPopup, setShowPopup] = useState(false);
+
+  const hasOptions = sizes?.length > 0 || extraIngredients?.length > 0
+
+  function handleAddToCart() {
+    if (hasOptions && !showPopup) {
+      setShowPopup(true)
+      return
+    }
+
+    addToCart(item, selectedSize, selectedExtras)
+    toast.success('Prodotto aggiunto al carrello con successo!')
+    setSelectedExtras([])
+    setSelectedSize(sizes?.[0] || null)
+    setShowPopup(false)
+  }
+
+
+  function handleExtrasIngredients(e, extra) {
+    const checked = e.target.checked;
+    if (checked) {
+      setSelectedExtras(prev => [...prev, extra])
+    } else {
+      setSelectedExtras(prev => {
+        return prev.filter(e => e.name !== extra.name)
+      })
+    }
+  }
+
+  let totalPrice = basePrice
+  if (selectedSize) {
+    totalPrice += selectedSize.price
+  }
+  if (selectedExtras?.length > 0) {
+    for (const extra of selectedExtras) {
+      totalPrice += extra.price
+    }
+  }
+
   return (
-      <div className="bg-gray-300 border mb-4 sm:mb-0 p-4 rounded-lg text-center
-      transition-all hover:bg-white hover:shadow-md hover:shadow-black/25">
+    <>
+      {showPopup && (
         <div>
-           <img className='max-h-auto max-h-32 block mx-auto' src="/pizza.png" alt="menu-item" />
+          <div className='fixed inset-0 bg-black/80'
+            onClick={() => setShowPopup(false)}
+          />
+
+          <button onClick={() => setShowPopup(false)}
+            className='absolute top-[9%] transition-all
+          text-xl text-white right-6 z-20 p-2 bg-primaryHover rounded-full hover:scale-110'>
+            <CloseIcon />
+          </button>
+
+          <div style={{ maxHeight: 'calc(100vh - 100px)' }}
+            className='overflow-auto absolute top-[10%] left-0 right-0 mx-auto w-[90%] z-10 bg-white p-6 rounded-lg flex flex-col justify-center items-center'>
+            <MenuItemTile item={item} onClick={() => selectedSize()} />
+
+            {sizes && (
+              <div className='extras'>
+                <p className='text-center mb-2'>Seleziona la tua porzione</p>
+                {sizes.map((size, i) => (
+                  <label className='extrasInput' key={i}>
+                    <input type='radio' name='size'
+                      onClick={() => setSelectedSize(size)}
+                      checked={selectedSize?.name === size.name}
+                    />
+                    <span className="grow">{size.name}</span>
+                    <span> {(basePrice + size.price).toFixed(2)} €</span>
+                  </label>
+                ))}
+              </div>
+            )}
+
+            {extraIngredients?.length > 0 && (
+              <div className='extras'>
+                <p className='text-center mb-2'>Vuoi aggiungere qualcosa?</p>
+                {extraIngredients.map((extra, i) => (
+                  <label className='extrasInput' key={i}
+                    onChange={(e) => handleExtrasIngredients(e, extra)}>
+                    <input type='checkbox' name={extra.name} />
+                    <span className="grow">{extra.name}</span>
+                    <span className='text-primaryHover font-semibold'> {(extra.price).toFixed(2)} €</span>
+                  </label>
+                ))}
+              </div>
+            )}
+
+            <BtnAggCarrello addCartClick={handleAddToCart} item={item}>
+              Aggiungi al carrello € {(totalPrice).toFixed(2)}
+            </BtnAggCarrello>
+          </div>
+
         </div>
-       
-        <h4 className="font-semibold my-4">Pepperoni Pizza</h4>
-        <p className="text-gray-500 text-sm">
-          Lorem ipsum dolor sit amet.
-        </p>
-        <button className="bg-primary text-white rounded-full px-4 py-2 mt-4">Add to cart $12</button>
+      )}
+
+      <div className="bg-gray-300 border mb-4 p-4 rounded-lg text-center flex flex-col 
+                          transition-all sm:mb-0  hover:bg-white hover:shadow-md hover:shadow-black/25">
+        <MenuItemTile item={item} />
+        <BtnAggCarrello addCartClick={handleAddToCart} item={item}>
+          {hasOptions ?
+            `A partire da € ${(basePrice).toFixed(2)}`
+            :
+            `Aggiungi al carrello € ${(basePrice).toFixed(2)}`}
+
+        </BtnAggCarrello>
       </div>
+    </>
   )
 }

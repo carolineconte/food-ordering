@@ -9,10 +9,10 @@ import Image from 'next/image';
 export default function MenuItemsPage() {
 
   const { loading: profileLoading, data: profileData } = UseProfile()
-  const [menuItems, setMenuItems] = useState('')
+  const [menuItems, setMenuItems] = useState([])
 
   useEffect(() => {
-    const res = fetch('/api/menu-items').then(res => {
+    fetch('/api/menu-items').then(res => {
       res.json().then(menuItems => {
         setMenuItems(menuItems)
       })
@@ -42,7 +42,7 @@ export default function MenuItemsPage() {
           {menuItems &&
             menuItems.map(item => (
               <Link href={'/menu-items/edit/' + item._id} key={item._id}
-                className=' capitalize gap-2 text-xl rounded-lg  shadow-sm border-4 border-slate-500
+                className='capitalize gap-2 cursor-pointer text-xl rounded-lg shadow-sm border-4 border-slate-500
                 hover:bg-slate-100/80'>
                 <Image className='object-cover max-h-40 object-center w-full h-full' src={item.image} alt='piatto' width={250} height={100} />
                 {item.name}

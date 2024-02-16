@@ -6,28 +6,30 @@ import toast from 'react-hot-toast';
 import Link from 'next/link';
 import Left from '@/components/icons/Left';
 import { useParams } from 'next/navigation';
-
+import MenuItemForm from '../../../../components/layout/MenuItemForm'
+import { useRouter } from 'next/navigation'
+import DeleteButton from '@/components/DeleteBtn'
 export default function EditMenuItemPage() {
-  const { loading: profileLoading, data: profileData } = UseProfile()
+  const { loading, data } = UseProfile()
   const { id } = useParams();
+  const router = useRouter();
+
+  const [menuItem, setMenuItem] = useState(null)
 
   useEffect(() => {
     fetch('/api/menu-items').then(res => {
-      res.json().then(items => {
-        const item = items.find(i => i._id === id)
-        setImage(item.image)
-        setName(item.name)
-        setDescription(item.description)
-        setBasePrice(item.basePrice)
-      })
+      res.json()
+        .then(items => {
+          const item = items.find(i => i._id === id)
+          setMenuItem(item)
+        })
     })
   }, [id])
 
-
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e, data) => {
     e.preventDefault();
 
-    const data = { image, name, description, basePrice, _id:id };
+    data = { ...data, _id: id };
 
     const savingPromise = fetch('/api/menu-items', {
       method: 'PUT',
@@ -42,17 +44,36 @@ export default function EditMenuItemPage() {
 
     await toast.promise(savingPromise, {
       loading: 'Caricamento in corso...',
-      success: 'Successo! Nuova categoria salvata.',
+      success: 'Le modifiche al piatto sono state salvate. ',
       error: 'Oops! C`è stato un problema, riprova più tardi.',
     });
-
   }
 
-  if (profileLoading) {
+  const handleDelete = async () => {
+    const savingPromise = fetch('/api/menu-items?_id=' + id, {
+      method: 'DELETE'
+    })
+      .then(res => {
+        if (!res.ok) {
+          throw new Error('Errore durante il salvataggio. Riprova più tardi.');
+        }
+      })
+
+    await toast.promise(savingPromise, {
+      loading: 'Stiamo applicando le tue modifiche, attendi un momento...',
+      success: 'Successo! I tuoi cambiamenti sono stati salvati.',
+      error: `Oops! C'è stato un problema, riprova più tardi.`
+    })
+
+    // Redireciona o usuário para outra página
+    router.push('/menu-items');
+  }
+
+  if (loading) {
     return 'Loading'
   }
 
-  if (!profileData) {
+  if (!data) {
     return 'Not allowed'
   }
 
@@ -60,11 +81,15 @@ export default function EditMenuItemPage() {
     <section className='grow mx-auto my-12'>
       <UserTabs />
       <Link className='btn flex gap-6 items-center justify-center my-8
-      hover:shadow-sm hover:bg-slate-100/80' href={'/menu-items'}>
+      hover:shadow-sm hover:bg-slate-100/80'
+        href={'/menu-items'}>
         <Left /> Visualizzare tutti i piatti
       </Link>
 
-    <MenuItemForm />
+      <MenuItemForm handleSubmit={handleSubmit} menuItem={menuItem} />
+
+      <DeleteButton label={'Deleta piatto'} onDelete={handleDelete} confirmMsg={"Confermi l'eliminazione di questo piatto?"}/>
+
     </section>
   )
 }

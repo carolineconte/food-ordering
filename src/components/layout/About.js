@@ -3,7 +3,7 @@ import { SectionHeaders } from './SectionHeaders'
 
 export const About = () => {
   return (
-    <section className='text-center flex flex-col gap-2 text-gray-500'>
+    <section id='about' className='text-center flex flex-col gap-2 text-gray-500'>
       <SectionHeaders
       mainHeader={'Chi Siamo'}
       subHeader={'Usiamo il superpotere della pizza per diffondere felicità'}
