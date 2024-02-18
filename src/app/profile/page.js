@@ -7,12 +7,14 @@ import toast from 'react-hot-toast';
 import UserTabs from '@/components/layout/UserTabs'
 import UserForm from '@/components/layout/UserForm'
 import UseProfile from '@/components/hooks/UseProfile';
+import Link from 'next/link';
+import LoadingMsg from '@/components/LoadingMsg'
 
 
 export default function ProfilePage() {
   const session = useSession();
   const { status } = session
- const { loading, data } = UseProfile();
+  const { loading, data } = UseProfile();
 
   const [user, setUser] = useState(null)
   const [profileFetched, setProfileFetched] = useState(false);
@@ -30,7 +32,7 @@ export default function ProfilePage() {
     }
   }, [session, status])
 
-  
+
 
   async function handleProfileInfoUpdate(e, userProfile) {
     e.preventDefault();
@@ -56,7 +58,7 @@ export default function ProfilePage() {
   }
 
   if (status === 'loading' || !profileFetched) {
-    return 'Loading...';
+    return <LoadingMsg/>
   }
 
   if (status === 'unauthenticated') {
@@ -64,13 +66,21 @@ export default function ProfilePage() {
   }
 
   return (
-    <section className='my-12 grow'>
+    <section className='my-12 grow flex flex-col items-center'>
 
       {data?.admin ? <UserTabs /> : <SessionHeader>Profilo</SessionHeader>}
 
       <div className='max-w-xl mx-auto'>
         <UserForm user={user} onSave={handleProfileInfoUpdate} />
       </div>
+      {
+        !data.admin && (
+          <Link className='btn w-1/3 mx-auto bg-secondary text-white'
+            href={'/orders'}>Tutti i miei ordini
+          </Link>)
+      }
+
+
     </section>
   )
 }

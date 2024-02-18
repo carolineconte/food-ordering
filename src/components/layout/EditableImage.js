@@ -35,7 +35,7 @@ export default function EditableImage({ link, setLink }) {
   return (
     <div className='w-52 flex flex-col text-center md:mt-4'>
       <div className=' bg-gray-100 border p-2 rounded-lg '>
-        <Image src={link ? link : '/addImg.svg'} width={250} height={250} alt='profile image'></Image>
+        <Image src={link ? link : '/addImg.svg'} width={250} height={250} quality={90} priority={true} alt='profile image'></Image>
       </div>
 
       <label>

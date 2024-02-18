@@ -5,7 +5,7 @@ export default function menuItemTile({ item }) {
 
   return (
     <>
-      <Image src={image} alt="menu-item" width={250} height={100} quality={95} priority={true}
+      <Image src={image} alt="menu-item" width={250} height={100} priority={true} quality={95}
         className='h-44 block mx-auto'
         />
       <h4 className="font-semibold text-xl">{name}</h4>

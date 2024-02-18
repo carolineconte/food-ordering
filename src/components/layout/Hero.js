@@ -3,38 +3,22 @@ import Right from "../icons/Right"
 
 export default function Hero() {
   return (
-    <section className="sm:grid grid-cols-2 sm:mt-6">
-      <div className="mt-4 text-center flex flex-col items-center gap-4">
-        <h1 className="text-4xl bg-primary w-full text-white py-2 !leading-15
-        sm:py-4 sm:text-6xl sm:text-left sm:px-2 sm:bg-white sm:text-black">
-          Everything is better <br />
-          with a
-          <span className="text-secondary sm:block"> Pizza!</span>
+    <section className="hero sm:mt-6 items-center">
+      
+      <div className="py-24 text-center text-white">
+        <h1 className="text-4xl grow w-full  py-2 !leading-15
+        sm:py-4 sm:text-8xl sm:px-2">
+          Che cosa c&apos;è <br/>
+          di meglio di una
+          <span className="text-secondary sm:block"> Pizza?</span>
         </h1>
 
-        <div className="sm:hidden">
-          <Image src={'/pizza.png'} alt={"pizza"} width={500} height={100} />
-        </div>
-
-        <p className="selection:my-4 text-gray-500 text-base
-        sm:text-lg sm:text-left">
-          Pizza is the missing piece that makes every day complete,
-          a simple yet delicious joy in life.
+        <p className="selection:my-4 text-base
+        sm:text-lg ">
+          Siamo orgogliosi di portare l&apos;autentica esperienza della cucina piemontese nella vostra tavola. 
+          Con la nostra passione per la tradizione e gli ingredienti 
+          freschi locali, ogni morso è un viaggio attraverso i sapori unici della nostra regione.
         </p>
-        <div className="flex gap-6 items-center text-sm">
-          <button className="flex gap-2 uppercase items-center bg-primary text-white px-4 py-2 rounded-full">
-            Order now
-            <Right />
-          </button>
-          <button className="flex gap-2 py-2 text-gray-500 font-semibold">
-            Learn more
-            <Right />
-          </button>
-        </div>
-      </div>
-      <div className="hidden relative sm:flex items-center ">
-        <Image src={'/pizza.png'} alt={"pizza"} quality={90}
-         className="w-full" width={200} height={200}/>
       </div>
 
     </section>

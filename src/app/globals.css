@@ -3,9 +3,16 @@
 @tailwind utilities;
 
 section.hero{
-  @apply grid;
-  grid-template-columns: .4fr .6fr;
+ background-image: url('../../public/pizzaHero.jpg');
+ background-size: cover; /* faz a imagem cobrir todo o elemento */
+ background-position: center; /* centraliza a imagem */
+ background-repeat: no-repeat; /* evita repetições da imagem */
 }
+
+section.hero h1{
+ text-shadow: 1px 1px 1px black;
+ 
+ }
 
 .input{
   @apply border w-full p-2 rounded-xl outline-none focus:ring-2 focus:bg-gray-100/20;
@@ -41,4 +48,16 @@ div.tabs > *.active{
 
 .extrasInput{
   @apply flex w-full gap-2 border my-1 p-2 rounded-lg hover:bg-gray-100 cursor-pointer;
+}
+
+.menuBtn{
+  @apply rounded-full text-white px-5 py-2 flex items-center justify-center;
+}
+
+.navMob > :nth-child(-n+4)  {
+  @apply border-b hover:bg-gray-100 w-full text-center pt-6;
+}
+
+a, Link{
+  @apply cursor-pointer;
 }

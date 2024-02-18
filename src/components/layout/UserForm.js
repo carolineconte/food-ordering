@@ -2,6 +2,7 @@
 import EditableImage from '@/components/layout/EditableImage'
 import { useState } from 'react';
 import UseProfile from '../../components/hooks/UseProfile';
+import LoadingMsg from '@/components/LoadingMsg'
 
 export default function UserForm({ user, onSave }) {
   const { loading, data } = UseProfile()
@@ -18,7 +19,7 @@ export default function UserForm({ user, onSave }) {
   const userData = { name: userName, admin, image, phone, address, city, postalCode, country }
 
   if (loading) {
-    return 'Loading'
+    return <LoadingMsg/>
   }
 
   if (!data && !loading) {
@@ -71,7 +72,7 @@ export default function UserForm({ user, onSave }) {
           <label htmlFor='adminCb'>
             <input id='adminCb' type="checkbox"
               value={'1'} checked={admin}
-              onClick={e => setAdmin(e.target.checked)} />
+              onChange={e => setAdmin(e.target.checked)} />
             <span className='ml-2 uppercase'>Admin</span>
           </label>
         )}

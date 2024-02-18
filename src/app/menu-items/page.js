@@ -5,6 +5,8 @@ import Link from 'next/link';
 import Right from '@/components/icons/Right'
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import LoadingMsg from '@/components/LoadingMsg'
+import BtnNavigate from '@/components/layout/BtnNavigate'
 
 export default function MenuItemsPage() {
 
@@ -20,7 +22,7 @@ export default function MenuItemsPage() {
   }, [])
 
   if (profileLoading) {
-    return 'Loading'
+    return <LoadingMsg/>
   }
 
   if (!profileData) {
@@ -31,13 +33,12 @@ export default function MenuItemsPage() {
     <section className='grow mx-auto my-12'>
       <UserTabs />
 
-      <Link className='btn flex gap-6 items-center justify-center
-      hover:shadow-sm hover:bg-slate-100/80' href={'/menu-items/new'}>
+      <BtnNavigate href={'/menu-items/new'}>
         Agg un nuovo piatto <Right />
-      </Link>
+      </BtnNavigate>
 
       <div className='mt-6'>
-        <h2 className='text-lg mb-2 underline p-1'>Selezionare il piatto da modificare:</h2>
+        <h2 className='text-xl mb-2 underline p-1'>Selezionare il piatto da modificare:</h2>
         <div className='grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 text-center'>
           {menuItems &&
             menuItems.map(item => (

@@ -12,11 +12,10 @@ export default function MenuItemForm({ handleSubmit, menuItem }) {
   const [sizes, setSizes] = useState(menuItem?.sizes || []);
   const [extraIngredients, setExtraIngredients] = useState(menuItem?.extraIngredients || []);
   const [categories, setCategories] = useState([])
-  const [highlight, setHighlight] = useState(menuItem?.highlight ||false)
+  const [highlight, setHighlight] = useState(menuItem?.highlight || false)
 
   const data = { name, image, description, categorie, highlight, basePrice, sizes, extraIngredients };
 
-  console.log(highlight)
   useEffect(() => {
     fetch('/api/categories').then(res => res.json().then(categories => {
       setCategories(categories)
@@ -43,11 +42,11 @@ export default function MenuItemForm({ handleSubmit, menuItem }) {
 
           <label>Categoria:
             <select className='input'
-              value={categorie} 
+              value={categorie}
               onChange={e => setCategorie(e.target.value)}>
-                  <option value=''>
-                    Seleziona categoria
-                  </option>
+              <option value=''>
+                Seleziona categoria
+              </option>
               {
                 categories.map(cat =>
                   <option value={cat._id} key={cat._id}>
@@ -78,11 +77,12 @@ export default function MenuItemForm({ handleSubmit, menuItem }) {
             nameExtra={'Opzioni degli ingredienti extra'}
             btnExtra={'Aggiungi ingredienti extra'}
             props={extraIngredients} setProps={setExtraIngredients} />
-
         </div>
       </div>
 
-      <button className='btn flex mt-6 bg-secondary text-white hover:bg-secondaryHover' type='submit'>
+      <button type='submit'
+        className='border px-10 mb-4 py-2 mx-auto block rounded-lg mt-6 bg-secondary text-white hover:bg-secondaryHover'
+      >
         Salva
       </button>
     </form>

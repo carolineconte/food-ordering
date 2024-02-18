@@ -13,7 +13,10 @@ module.exports = {
       secondary: '#005743',
       secondaryHover: '#033B2E',
       backgorund: '#F5EDEC'
-     }
+     },
+     backgroundImage: {
+      'hero-pattern': "url('/pizzaHero.svg')",
+    }
     },
   },
   plugins: [],

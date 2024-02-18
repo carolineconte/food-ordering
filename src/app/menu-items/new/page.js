@@ -1,11 +1,14 @@
 'use client'
-import UseProfile from '../../../components/hooks/UseProfile';
-import UserTabs from '@/components/layout/UserTabs';
 import toast from 'react-hot-toast';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation'
+
+import BtnNavigate from '@/components/layout/BtnNavigate'
+import UseProfile from '@/components/hooks/UseProfile';
+import UserTabs from '@/components/layout/UserTabs';
 import Left from '@/components/icons/Left';
 import MenuItemForm from '@/components/layout/MenuItemForm';
-import { useRouter } from 'next/navigation'
+import LoadingMsg from '@/components/LoadingMsg'
+
 
 export default function NewMenuItem() {
   const { loading: profileLoading, data: profileData } = UseProfile()
@@ -22,7 +25,7 @@ export default function NewMenuItem() {
       .then(response => {
         if (!response.ok) {
           throw new Error('Errore durante il salvataggio. Riprova più tardi.');
-        }else{
+        } else {
           router.push('/menu-items');
         }
       });
@@ -36,7 +39,7 @@ export default function NewMenuItem() {
   }
 
   if (profileLoading) {
-    return 'Loading'
+    return <LoadingMsg />
   }
 
   if (!profileData) {
@@ -46,13 +49,12 @@ export default function NewMenuItem() {
   return (
     <section className='grow mx-auto my-12'>
       <UserTabs />
-      <Link className='btn flex gap-6 items-center justify-center my-8
-      hover:shadow-sm hover:bg-slate-100/80' href={'/menu-items'}>
+      <BtnNavigate href={'/menu-items'}>
         <Left /> Visualizzare tutti i piatti
-      </Link>
+      </BtnNavigate>
 
       <MenuItemForm menuItem={null} handleSubmit={handleSubmit} />
- 
+
     </section>
   )
 }

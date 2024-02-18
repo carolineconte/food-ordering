@@ -18,11 +18,11 @@ export const HomeMenu = () => {
 
 
   return (
-    <section className="mt-20 flex flex-col items-center">
+    <section className="max-w-7xl mx-auto flex flex-col items-center">
 
       <SectionHeaders mainHeader={'Menu'} subHeader={'I gusti più amati'} />
 
-      <div className="py-4 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 sm:px-0 gap-4">
+      <div className="py-10 px-10 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 sm:px-0 gap-4">
         {
           itemsHighlighted.length > 0 && (
             itemsHighlighted.map(item => (
@@ -33,7 +33,7 @@ export const HomeMenu = () => {
       </div>
       <Link href={'/menu'} className='bg-primary border-collapse text-white w-1/3 text-center py-2 rounded-xl
       uppercase shadow-md hover:bg-primaryHover'>
-        Menu</Link>
+        Guarda il nostro menu completo</Link>
     </section>
   )
 }

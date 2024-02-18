@@ -5,7 +5,7 @@ import { Roboto } from "next/font/google";
 import Header from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { AppProvider } from '@/components/AppContext'
-
+import CartButton from '@/components/layout/CartButton'
 import { Toaster } from 'react-hot-toast';
 
 const inter = Inter({ subsets: ["latin"] });
@@ -20,11 +20,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className="bg-white scroll-smooth">
       <body className={roboto.className}>
-        <main className="max-w-7xl mx-auto p-6 flex flex-col h-screen">
+        <main className="mx-auto flex flex-col h-screen">
           <AppProvider>
             <Toaster />
             <Header />
             {children}
+            <CartButton />
             <Footer />
           </AppProvider>
         </main>

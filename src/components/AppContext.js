@@ -48,7 +48,6 @@ export function AppProvider({ children }) {
   function clearCart() {
     setCartProducts([])
     saveCartProductsToLocalStorage([])
-    toast.success('Carrello svuotato con successo.')
   }
 
   function removeCartItem(indexToRemove) {

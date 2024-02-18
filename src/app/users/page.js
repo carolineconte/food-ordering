@@ -1,16 +1,16 @@
 'use client'
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
+//COMPONENTS
 import UseProfile from '../../components/hooks/UseProfile';
 import UserTabs from '@/components/layout/UserTabs';
-import DeleteButton from '@/components/DeleteBtn'
-import Trash from '@/components/icons/Trash'
-import Config from '@/components/icons/Config'
-import Link from 'next/link';
+import Config from '@/components/icons/Config';
+import LoadingMsg from '@/components/LoadingMsg';
 
 export default function UsersPage() {
-  const { loading, data } = UseProfile()
 
-  const [users, setUsers] = useState([])
+  const { loading, data } = UseProfile();
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
     fetch('/api/users').then(res => {
@@ -21,7 +21,7 @@ export default function UsersPage() {
   }, [])
 
   if (loading) {
-    return 'Loading'
+    return <LoadingMsg/>
   }
 
   if (!data && !loading) {
@@ -36,7 +36,6 @@ export default function UsersPage() {
         <div className='table' >
           <span className='border-b-4 '>Nome:</span>
           <span className='border-b-4'>email:</span>
-          
           <button className='border-b-4'>Config</button>
         </div>
         {

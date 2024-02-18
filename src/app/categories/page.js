@@ -1,6 +1,7 @@
 'use client'
 import UseProfile from '../../components/hooks/UseProfile';
 import UserTabs from '@/components/layout/UserTabs';
+import LoadingMsg from '@/components/LoadingMsg'
 
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
@@ -86,7 +87,7 @@ export default function Categories() {
   }, [])
 
   if (profileLoading) {
-    return 'Loading'
+    return <LoadingMsg />
   }
 
   if (!profileData && !profileLoading) {
@@ -94,24 +95,31 @@ export default function Categories() {
   }
 
   return (
-    <section className='grow mx-auto my-12 '>
+    <section className='grow mx-auto my-12 md:w-1/2 '>
       <UserTabs />
-      <form className='flex gap-2 items-end' onSubmit={handleCategorySubmit}>
-        <label className='grow'>
-          {editedCategory ? 'Modifica Categoria: ' : 'Nuova Categoria:'}
-          {editedCategory &&
-            (<span className='underline font-bold text-primary'>{editedCategory.name}</span>)}
-          <input type="text" name="" className='input' placeholder='Nome categoria'
-            value={categoryName} onChange={e => setCategoryName(e.target.value)} />
+
+      <form onSubmit={handleCategorySubmit}>
+        <label className='grow w-full'>
+          <span className='w-full'>{editedCategory ? 'Modifica Categoria: ' : 'Nuova Categoria:'}</span>
+          {editedCategory && (<span className='underline w-full font-bold text-primary'>{editedCategory.name}</span>)}
         </label>
-        <button className='btn h-fit hover:bg-gray-300' type='submit'>
-          {editedCategory ? 'Modifica' : 'Aggiungi'}
-        </button>
-        {editedCategory && 
-        <button className='btn h-fit hover:bg-gray-300' type='button'
-        onClick={() => {setEditedCategory(null); setCategoryName('')}}>
-          Cancela
-          </button>}
+
+        <div className='flex md:flex-nowrap flex-wrap'>
+          <input type="text" name="" className='input' placeholder='Nome categoria'
+            value={categoryName} onChange={e => setCategoryName(e.target.value)}
+          />
+          <div className='flex w-full justify-center gap-3 items-center'>
+            <button className='border px-6 py-3 font-bold rounded-lg text-lg hover:bg-gray-300' type='submit'>
+              {editedCategory ? 'Modifica' : 'Aggiungi'}
+            </button>
+
+            {editedCategory &&
+              <button className='border px-6 py-3 font-bold rounded-lg text-lg hover:bg-gray-300' type='button'
+                onClick={() => { setEditedCategory(null); setCategoryName('') }}>
+                Cancela
+              </button>
+            }</div>
+        </div>
       </form>
 
       <div className='mt-6'>
@@ -131,8 +139,11 @@ export default function Categories() {
                   <Edit className={'w-4 h-4'} />
                 </button>
 
-                <DeleteButton label={<Trash className={'w-4 h-4'} />} onDelete={() => handleDelete(cat._id)} confirmMsg={"Confermi l'eliminazione di questo piatto?"}/>
-
+                <DeleteButton
+                  label={<Trash className={'w-4 h-4'} />}
+                  onDelete={() => handleDelete(cat._id)}
+                  confirmMsg={"Confermi l'eliminazione di questo piatto?"}
+                />
               </div>
             </div>
           ))

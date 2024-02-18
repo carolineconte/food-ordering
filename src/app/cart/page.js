@@ -6,11 +6,20 @@ import Image from "next/image";
 import { useContext, useEffect, useState } from "react";
 import UseProfile from '../../components/hooks/UseProfile';
 import toast from "react-hot-toast";
+import LoadingMsg from '@/components/LoadingMsg'
 
 export default function CartPge() {
 
   const { data: profileData, loading } = UseProfile()
-  const [userAddress, setUser] = useState(null)
+  const [user, setUser] = useState(null)
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      if (window.location.href.includes('canceled=1')) {
+        toast.error('Mi dispiace, il pagamento è stato rifiutato.')
+      }
+    }
+  }, [])
 
   useEffect(() => {
     if (profileData?.city) {
@@ -20,21 +29,22 @@ export default function CartPge() {
     }
   }, [profileData])
 
-  const [userName, setUserName] = useState('')
+  const [name, setName] = useState('')
   const [phone, setPhone] = useState('')
   const [address, setAddress] = useState('')
   const [city, setCity] = useState('')
   const [postalCode, setPostalCode] = useState('')
+  const [intercom, setIntercom] = useState('')
 
   useEffect(() => {
-    if (userAddress) {
-      setUserName(userAddress.name || '');
-      setPhone(userAddress.phone || '');
-      setAddress(userAddress.address || '');
-      setCity(userAddress.city || '');
-      setPostalCode(userAddress.postalCode || '');
+    if (user) {
+      setName(user.name || '');
+      setPhone(user.phone || '');
+      setAddress(user.address || '');
+      setCity(user.city || '');
+      setPostalCode(user.postalCode || '');
     }
-  }, [userAddress])
+  }, [user])
 
   const { cartProducts, clearCart, removeCartItem } = useContext(CartContext);
   //calculo valor final
@@ -45,13 +55,23 @@ export default function CartPge() {
 
   async function proceedToCheckout(e) {
     e.preventDefault()
+
+    const userAddress = {
+      name,
+      phone,
+      address,
+      city,
+      postalCode,
+      intercom
+    }
+
     //address and shopping cart products
     const savingPromise = fetch('/api/checkout', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         userAddress,
-        cartProducts
+        cartProducts,
       })
     }).then(async res => {
       if (!res.ok) {
@@ -70,7 +90,7 @@ export default function CartPge() {
   }
 
   if (loading) {
-    return <p>caricando</p>
+    return <LoadingMsg />
   }
 
   if (cartProducts?.length === 0) {
@@ -92,8 +112,8 @@ export default function CartPge() {
 
           {cartProducts.map((product, i) => (
             <section key={i} className="flex gap-3 border-b p-2 items-center">
-              <div className="rounded-full ">
-                <Image src={product.image} width={100} height={100} alt="prodoto" />
+              <div className="rounded-full">
+                <Image src={product.image} width={100} height={100} priority={true} alt="prodoto" />
               </div>
               <div className="grow">
                 <h2 className="text-lg flex justify-between">
@@ -128,7 +148,6 @@ export default function CartPge() {
 
         </div>
 
-
         <div className="grow bg-gray-100 rounded-lg p-4">
           <h2>Dettagli di consegna</h2>
 
@@ -136,33 +155,33 @@ export default function CartPge() {
             <label className='label'>
               <span className="text-sm text-gray-600">Nome </span>
               <input className='input text-black' type="text" placeholder='Nome e Cognome'
-                value={userName} onChange={e => setUserName(e.target.value)} />
+                value={name} onChange={e => setName(e.target.value)} required />
             </label>
 
             <label className='label'><span className="text-sm text-gray-600">Numero telefono:</span>
               <input className='input text-black' type="tel" placeholder='Telefone'
-                value={phone} onChange={e => setPhone(e.target.value)} />
+                value={phone} onChange={e => setPhone(e.target.value)} required />
             </label>
 
             <label className='label'><span className="text-sm text-gray-600">Indirrizzo:</span>
               <input className='input text-black' type="text" placeholder='Via, num civico'
-                value={address} onChange={e => setAddress(e.target.value)} />
+                value={address} onChange={e => setAddress(e.target.value)} required />
             </label>
 
             <div className='flex gap-2'>
               <label className='label'><span className="text-sm text-gray-600">Citta:</span>
                 <input className='input text-black' type="text" placeholder='Citta'
-                  value={city} onChange={e => setCity(e.target.value)} />
+                  value={city} onChange={e => setCity(e.target.value)} required />
               </label>
 
               <label className='label'><span className="text-sm text-gray-600">CAP:</span>
                 <input className='input text-black' type="text" placeholder='CAP'
-                  value={postalCode} onChange={e => setPostalCode(e.target.value)} />
+                  value={postalCode} onChange={e => setPostalCode(e.target.value)} required />
               </label>
             </div>
-            <label className='label'><span className="text-sm text-gray-600">Consegna:</span>
-              <input className='input text-black' type="text" placeholder='CAP'
-                value={postalCode} onChange={e => setPostalCode(e.target.value)} />
+            <label className='label'><span className="text-sm text-gray-600">Citofono:</span>
+              <input className='input text-black' type="text" placeholder='Citofono'
+                value={intercom} onChange={e => setIntercom(e.target.value)} required />
             </label>
             <div className="my-3 border-t p-3">
               <p>Riepilogo:</p>

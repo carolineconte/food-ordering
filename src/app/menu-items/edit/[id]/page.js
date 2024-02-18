@@ -9,6 +9,10 @@ import { useParams } from 'next/navigation';
 import MenuItemForm from '../../../../components/layout/MenuItemForm'
 import { useRouter } from 'next/navigation'
 import DeleteButton from '@/components/DeleteBtn'
+import LoadingMsg from '@/components/LoadingMsg'
+import BtnNavigate from '@/components/layout/BtnNavigate'
+
+
 export default function EditMenuItemPage() {
   const { loading, data } = UseProfile()
   const { id } = useParams();
@@ -64,15 +68,13 @@ export default function EditMenuItemPage() {
       success: 'Successo! I tuoi cambiamenti sono stati salvati.',
       error: `Oops! C'è stato un problema, riprova più tardi.`
     })
-
     // Redireciona o usuário para outra página
     router.push('/menu-items');
   }
 
   if (loading) {
-    return 'Loading'
+    return <LoadingMsg />
   }
-
   if (!data) {
     return 'Not allowed'
   }
@@ -80,16 +82,20 @@ export default function EditMenuItemPage() {
   return (
     <section className='grow mx-auto my-12'>
       <UserTabs />
-      <Link className='btn flex gap-6 items-center justify-center my-8
-      hover:shadow-sm hover:bg-slate-100/80'
-        href={'/menu-items'}>
-        <Left /> Visualizzare tutti i piatti
-      </Link>
+      <BtnNavigate href={'/menu-items'}>
+        <Left /> Ritorna alla lista dei piatti
+      </BtnNavigate>
 
-      <MenuItemForm handleSubmit={handleSubmit} menuItem={menuItem} />
+      <MenuItemForm
+        handleSubmit={handleSubmit}
+        menuItem={menuItem}
+      />
 
-      <DeleteButton label={'Deleta piatto'} onDelete={handleDelete} confirmMsg={"Confermi l'eliminazione di questo piatto?"}/>
-
+      <DeleteButton
+        label={'Deleta piatto'}
+        onDelete={handleDelete}
+        confirmMsg={"Confermi l'eliminazione di questo piatto?"}
+      />
     </section>
   )
 }
