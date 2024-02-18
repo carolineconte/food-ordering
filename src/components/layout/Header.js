@@ -37,7 +37,7 @@ function Header() {
     if (status === 'unauthenticated') {
       return (
         <>
-          <Link href={'/login'}> Accedi</Link >
+          <Link href={'/login'} className="px-5 py-2 rounded-full hover:bg-secondaryHover/50"> Accedi</Link >
           <Link href={'/register'} className="bg-primary menuBtn text-center">Creare account</Link>
         </>
       )
