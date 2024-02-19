@@ -75,9 +75,9 @@ export default function CartPge() {
       })
     }).then(async res => {
       if (!res.ok) {
-        throw new Error('Errore, Riprova più tardi.');
+        throw new Error(res);
       } else {
-        const link = await res.json() // Assuming the link is in a property called "link" in the JSON response
+        const link = await res.json()
         // redirect to stripe
         window.location = link;
       }
@@ -95,7 +95,7 @@ export default function CartPge() {
 
   if (cartProducts?.length === 0) {
     return (
-      <section className='grow mx-auto w-full px-4 flex items-center text-center'>
+      <section className='h-[75vh] w-1/2 mx-auto px-4 flex items-center text-center'>
         <p>
           Benvenuto nel tuo carrello! Aggiungi le nostre gustose pizze
           e gli accompagnamenti per creare il tuo pasto perfetto!
@@ -105,7 +105,7 @@ export default function CartPge() {
   }
 
   return (
-    <section className='grow mx-auto w-full px-4'>
+    <section className=' mx-auto w-full px-4'>
       <SectionHeaders mainHeader={'Il tuo ordine'} subHeader={`${cartProducts.length} ${cartProducts.length > 1 ? 'prodotti' : 'prodotto'}`} />
       <div className="md:grid grid-cols-2 gap-4 my-6">
         <div className="grow">
