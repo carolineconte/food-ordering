@@ -64,29 +64,33 @@ export default function CartPge() {
       postalCode,
       intercom
     }
-
-    //address and shopping cart products
-    const savingPromise = fetch('/api/checkout', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        userAddress,
-        cartProducts,
+    try {
+      //address and shopping cart products
+      const savingPromise = fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          userAddress,
+          cartProducts,
+        })
+      }).then(async res => {
+        if (!res.ok) {
+          throw new Error(res.error);
+        } else {
+          const link = await res.json()
+          // redirect to stripe
+          window.location = link;
+        }
       })
-    }).then(async res => {
-      if (!res.ok) {
-        throw new Error(res);
-      } else {
-        const link = await res.json()
-        // redirect to stripe
-        window.location = link;
-      }
-    })
-    await toast.promise(savingPromise, {
-      loading: 'Attendere prego...',
-      success: 'Verrai reindirizzato alla pagina di conferma.',
-      error: 'Si è verificato un errore durante l\'elaborazione del pagamento. Si prega di riprovare più tardi.',
-    });
+      await toast.promise(savingPromise, {
+        loading: 'Attendere prego...',
+        success: 'Verrai reindirizzato alla pagina di conferma.',
+        error: 'Si è verificato un errore durante l\'elaborazione del pagamento. Si prega di riprovare più tardi.',
+      });
+
+    } catch (e) {
+      console.log(e)
+    }
   }
 
   if (loading) {
