@@ -75,7 +75,7 @@ export default function CartPge() {
         })
       }).then(async res => {
         if (!res.ok) {
-          throw new Error(res.error);
+          throw new Error('Erro');
         } else {
           const link = await res.json()
           // redirect to stripe
