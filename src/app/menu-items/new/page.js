@@ -35,6 +35,7 @@ export default function NewMenuItem() {
       success: 'Il nuovo piatto è stato aggiunto al menu.',
       error: 'Oops! C`è stato un problema, riprova più tardi.',
     });
+    router.push('/menu-items');
 
   }
 

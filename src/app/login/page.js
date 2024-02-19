@@ -15,7 +15,7 @@ export default function LoginPage() {
     e.preventDefault();
     setLoading(true);
     //fazer as credenciais assim por seguranca
-    await signIn('credentials', { email, password });
+    await signIn('credentials', { email, password,callbackUrl: '/' });
     //calback redireciona para homepage
     setLoading(false)
   }
