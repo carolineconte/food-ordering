@@ -70,8 +70,8 @@ export default function MenuItemForm({ handleSubmit, menuItem }) {
           </label>
 
           <MenuItemPriceProps
-            nameExtra={'Opzioni di dimensione'}
-            btnExtra={'Aggiungi opzioni di dimensione'}
+            nameExtra={'variazioni'}
+            btnExtra={'Aggiungi varianti del piatto.'}
             props={sizes} setProps={setSizes} />
           <MenuItemPriceProps
             nameExtra={'Opzioni degli ingredienti extra'}
