@@ -22,8 +22,16 @@ export default function MenuItemForm({ handleSubmit, menuItem }) {
     }))
   }, [])
 
+  const submitClick = (e, data) => {
+    if (!name || !image || !basePrice || !description || !categorie) {
+      alert('Compilare tutti i campi obbligatori')
+      return
+    }
+    handleSubmit(e, data)
+  }
+
   return (
-    <form onSubmit={(e) => handleSubmit(e, data)} className='mt-12'>
+    <form onSubmit={(e) => submitClick(e, data)} className='mt-12'>
       <div className='flex flex-col items-center gap-4 md:flex-row md:items-start'>
         <EditableImage link={image} setLink={setImage} />
 
@@ -81,8 +89,7 @@ export default function MenuItemForm({ handleSubmit, menuItem }) {
       </div>
 
       <button type='submit'
-        className='border px-10 mb-4 py-2 mx-auto block rounded-lg mt-6 bg-secondary text-white hover:bg-secondaryHover'
-      >
+        className='border px-10 mb-4 py-2 mx-auto block rounded-lg mt-6 bg-secondary text-white hover:bg-secondaryHover' >
         Salva
       </button>
     </form>

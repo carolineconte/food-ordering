@@ -17,6 +17,7 @@ export default function NewMenuItem() {
   const handleSubmit = async (e, data) => {
     e.preventDefault();
 
+   
     const savingPromise = fetch('/api/menu-items', {
       method: 'POST',
       body: JSON.stringify(data),
@@ -48,7 +49,7 @@ export default function NewMenuItem() {
   }
 
   return (
-    <section className='grow mx-auto my-12'>
+    <section className='grow mx-auto my-12 w-3/4'>
       <UserTabs />
       <BtnNavigate href={'/menu-items'}>
         <Left /> Visualizzare tutti i piatti
