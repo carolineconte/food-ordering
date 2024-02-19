@@ -74,8 +74,8 @@ function Header() {
         <Link className="text-primary font-semibold text-2xl" href="/">Fiorella</Link>
         <nav className="flex items-center gap-8 text-gray-500 font-semibold">
         <Link href={'/menu'}>Ordina</Link>
-            <Link href={'#about'}>Storia</Link>
-            <Link href={'#contact'}>Contattaci</Link>
+            <Link href={'/#about'}>Storia</Link>
+            <Link href={'/#contact'}>Contattaci</Link>
 
         </nav>
         <nav className="flex items-center justify-center gap-4">
