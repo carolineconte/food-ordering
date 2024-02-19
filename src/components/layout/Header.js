@@ -59,9 +59,9 @@ function Header() {
           className={mobileNavOpen ? 'fixed bg-white right-0 left-0 pb-4 ' : 'hidden'}>
           <nav className="flex flex-col items-center text-gray-500 font-semibold navMob">
             <Link href={'/'}>Home</Link>
-            <Link href={'/menu'}>Menu</Link>
-            <Link href={'#about'}>About</Link>
-            <Link href={'#contact'}>Contact</Link>
+            <Link href={'/menu'}>Ordina</Link>
+            <Link href={'#about'}>Storia</Link>
+            <Link href={'#contact'}>Contattaci</Link>
             <div className="flex flex-col gap-4 mt-4">
             <AuthLinks status={status} />
             </div>
@@ -73,9 +73,10 @@ function Header() {
       <header className="hidden px-10 pt-6 pb-4  md:flex  items-center justify-between border-b-2">
         <Link className="text-primary font-semibold text-2xl" href="/">Fiorella</Link>
         <nav className="flex items-center gap-8 text-gray-500 font-semibold">
-          <Link href={'/menu'}>Menu</Link>
-          <Link href={'#about'}>About</Link>
-          <Link href={'#contact'}>Contact</Link>
+        <Link href={'/menu'}>Ordina</Link>
+            <Link href={'#about'}>Storia</Link>
+            <Link href={'#contact'}>Contattaci</Link>
+
         </nav>
         <nav className="flex items-center justify-center gap-4">
           <AuthLinks status={status} />

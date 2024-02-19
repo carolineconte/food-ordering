@@ -23,7 +23,8 @@ export default function MenuItemForm({ handleSubmit, menuItem }) {
   }, [])
 
   const submitClick = (e, data) => {
-    if (!name || !image || !basePrice || !description || !categorie) {
+    e.preventDefault()
+    if (!name || !basePrice || !description || !categorie) {
       alert('Compilare tutti i campi obbligatori')
       return
     }

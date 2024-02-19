@@ -18,7 +18,7 @@ export const HomeMenu = () => {
 
 
   return (
-    <section className="max-w-7xl mx-auto flex flex-col items-center">
+    <section className="mt-[70vh] mx-auto flex flex-col items-center">
 
       <SectionHeaders mainHeader={'Menu'} subHeader={'I gusti più amati'} />
 
@@ -32,7 +32,7 @@ export const HomeMenu = () => {
         }
       </div>
       <Link href={'/menu'} className='bg-primary border-collapse text-white w-1/3 text-center py-2 rounded-xl
-      uppercase shadow-md hover:bg-primaryHover'>
+      uppercase shadow-xl hover:bg-primaryHover'>
         Guarda il nostro menu completo</Link>
     </section>
   )

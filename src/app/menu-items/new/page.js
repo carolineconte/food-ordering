@@ -49,7 +49,7 @@ export default function NewMenuItem() {
   }
 
   return (
-    <section className='grow mx-auto my-12 w-3/4'>
+    <section className='grow my-12 mx-auto'>
       <UserTabs />
       <BtnNavigate href={'/menu-items'}>
         <Left /> Visualizzare tutti i piatti

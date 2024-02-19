@@ -4,9 +4,11 @@
 
 section.hero{
  background-image: url('../../public/pizzaHero.jpg');
- background-size: cover; /* faz a imagem cobrir todo o elemento */
- background-position: center; /* centraliza a imagem */
- background-repeat: no-repeat; /* evita repetições da imagem */
+ background-size: cover;
+ background-position: center;
+ background-repeat: no-repeat;
+ margin: 0;
+ padding: 0;
 }
 
 section.hero h1{

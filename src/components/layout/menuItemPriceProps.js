@@ -33,14 +33,15 @@ export default function MenuItemPriceProps({ nameExtra, btnExtra, props, setProp
         onClick={() => setIsOpen(!isOpen)}>
         {isOpen ? <Up /> : <Down />}
         <span>{nameExtra} <span className='rounded-full border px-2 py-1 font-black ml-2 bg-white'>{props?.length}</span></span>
+      
       </button>
 
       {isOpen && (
         <>
           {props && props.map((prop, i) => (
-            <div className='flex gap-2 items-end ' key={i}>
+            <div className='flex gap-1 items-end ' key={i}>
               <label>Inserisci il nome:
-                <input className='input' type="text" placeholder='Nome della porzione'
+                <input className='input' type="text" placeholder='Nome'
                   value={prop.name} onChange={ev => editProp(ev, i, 'name')} />
               </label>
               <label>Costo extra:

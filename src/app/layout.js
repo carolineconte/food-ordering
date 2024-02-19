@@ -18,17 +18,17 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className="bg-white scroll-smooth">
+    <html lang="en" className="bg-white scroll-smooth h-screen">
       <body className={roboto.className}>
-        <main className="mx-auto flex flex-col h-screen">
-          <AppProvider>
-            <Toaster />
+        <AppProvider>
+          <Toaster />
             <Header />
+          <main className="mx-auto flex flex-col w-11/12">
             {children}
+          </main>
             <CartButton />
-            <Footer />
-          </AppProvider>
-        </main>
+          <Footer />
+        </AppProvider>
       </body>
     </html>
   );
