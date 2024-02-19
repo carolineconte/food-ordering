@@ -55,22 +55,19 @@ export const MenuItem = ({ item }) => {
   return (
     <>
       {showPopup && (
-        <div>
-          <div className='fixed inset-0 bg-black/80'
-            onClick={() => setShowPopup(false)}
-          />
+        <div className='flex items-center'>
+          <div className='fixed inset-0 bg-black/80' onClick={() => setShowPopup(false)}/>
 
-          <button onClick={() => setShowPopup(false)}
-            className='absolute top-[9%] transition-all
-          text-xl text-white right-6 z-20 p-2 bg-primaryHover rounded-full hover:scale-110'>
-            <CloseIcon />
-          </button>
+          <div className='overflow-auto absolute left-0 right-0 mx-auto w-[50%] z-10 bg-white p-6 rounded-lg flex flex-col justify-center items-center'>
 
-          <div style={{ maxHeight: 'calc(100vh - 100px)' }}
-            className='overflow-auto absolute top-[10%] left-0 right-0 mx-auto w-[90%] z-10 bg-white p-6 rounded-lg flex flex-col justify-center items-center'>
+            <button onClick={() => setShowPopup(false)}
+              className='absolute transition-all text-xl text-white top-1 right-1 z-20 p-2 bg-primaryHover rounded-lg hover:scale-110'>
+              <CloseIcon />
+            </button>
+
             <MenuItemTile item={item} onClick={() => selectedSize()} />
 
-            {sizes && (
+            {sizes?.length > 0 && (
               <div className='extras'>
                 <p className='text-center mb-2'>Seleziona la tua porzione</p>
                 {sizes.map((size, i) => (

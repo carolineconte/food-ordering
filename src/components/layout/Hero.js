@@ -2,7 +2,7 @@
 
 export default function Hero() {
   return (
-    <section className="hero absolute right-0 left-0 w-screen">
+    <section className="hero absolute right-0 left-0 ">
       
       <div className="py-24 text-center text-white w-full px-0 sm:px-4">
         <h1 className="text-4xl grow w-full  py-2 !leading-15
