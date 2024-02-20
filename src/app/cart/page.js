@@ -88,8 +88,8 @@ export default function CartPge() {
         error: 'Si è verificato un errore durante l\'elaborazione del pagamento. Si prega di riprovare più tardi.',
       });
 
-    } catch (e) {
-      console.log(e)
+    } catch (error) {
+      console.error('Ocorreu um erro:', error.message);
     }
   }
 
