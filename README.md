@@ -1,4 +1,4 @@
-![Logo do projeto](https://i.imgur.com/kniMQHu.png)
+<img width="1440" alt="Captura de Tela 2024-02-20 às 11 11 06" src="https://github.com/carolineconte/food-ordering/assets/132572031/a8e92374-3c72-4826-aa41-40159d0e0d85">
 
 # Fiorella 
 ### Topics
@@ -22,3 +22,10 @@ Project for an online ordering website, featuring seamless login and registratio
 <img src="https://img.shields.io/badge/MongoDB-282C34?logo=mongoDB&logoColor=47A248" alt="MongoDB logo" title="Node.js" height="30" />
 <br>
 </div>
+
+
+##  Videos
+<a id="videos"></a>
+
+https://github.com/carolineconte/food-ordering/assets/132572031/1c70cb68-49a2-40bf-bdd8-bb2fe91c77e6
+
