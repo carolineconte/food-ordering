@@ -47,7 +47,7 @@ function Header() {
   return (
     <>
       {/* Menu mobile */}
-      <header className="md:hidden px-10 pt-6 pb-4">
+      <header className="md:hidden px-10 pt-6 pb-4 ">
         <div className="flex justify-between items-center border-b">
           <Link className="text-primary font-semibold text-2xl" href="/">Fiorella</Link>
           <button onClick={() => setMobileNavOpen(!mobileNavOpen)}>
@@ -56,14 +56,14 @@ function Header() {
         </div>
 
         <div onClick={() => setMobileNavOpen(!mobileNavOpen)}
-          className={mobileNavOpen ? 'fixed bg-white right-0 left-0 pb-4 ' : 'hidden'}>
+          className={mobileNavOpen ? 'z-50 fixed bg-white right-0 left-0 pb-4 ' : 'hidden'}>
           <nav className="flex flex-col items-center text-gray-500 font-semibold navMob">
             <Link href={'/'}>Home</Link>
             <Link href={'/menu'}>Ordina</Link>
-            <Link href={'#about'}>Storia</Link>
-            <Link href={'#contact'}>Contattaci</Link>
+            <Link href={'/#about'}>Storia</Link>
+            <Link href={'/#contact'}>Contattaci</Link>
             <div className="flex flex-col gap-4 mt-4">
-            <AuthLinks status={status} />
+              <AuthLinks status={status} />
             </div>
           </nav>
         </div>
@@ -73,9 +73,9 @@ function Header() {
       <header className="hidden px-10 pt-6 pb-4  md:flex  items-center justify-between border-b-2">
         <Link className="text-primary font-semibold text-2xl" href="/">Fiorella</Link>
         <nav className="flex items-center gap-8 text-gray-500 font-semibold">
-        <Link href={'/menu'}>Ordina</Link>
-            <Link href={'/#about'}>Storia</Link>
-            <Link href={'/#contact'}>Contattaci</Link>
+          <Link href={'/menu'}>Ordina</Link>
+          <Link href={'/#about'}>Storia</Link>
+          <Link href={'/#contact'}>Contattaci</Link>
 
         </nav>
         <nav className="flex items-center justify-center gap-4">

@@ -11,7 +11,6 @@ export default function CartButton() {
 
   const path = usePathname();
   const pagesToShow = path === '/' || path === '/menu';
-  console.log(pagesToShow)
   
   const { cartProducts } = useContext(CartContext)
   const { data } = UseProfile()
@@ -20,9 +19,7 @@ export default function CartButton() {
   if(data.admin || loading){
     return ''
   }
-
-
-
+  
   return (
     <>
       {cartProducts.length > 0 && pagesToShow  && (

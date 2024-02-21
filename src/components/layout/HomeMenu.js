@@ -18,7 +18,7 @@ export const HomeMenu = () => {
 
 
   return (
-    <section className="mt-[70vh] mx-auto flex flex-col items-center">
+    <section className="mt-[50vh] md:mt-[70vh] mx-auto flex flex-col items-center">
 
       <SectionHeaders mainHeader={'Menu'} subHeader={'I gusti più amati'} />
 

@@ -74,7 +74,7 @@ export default function OrderPage() {
   }
 
   return (
-    <section className=" grow md: w-3/4 mx-auto ">
+    <section className=" grow md:w-3/4 mx-auto ">
       {profile.admin ? (
         <div className="mt-6 mx-auto">
           <UserTabs />
