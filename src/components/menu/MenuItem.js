@@ -58,7 +58,7 @@ export const MenuItem = ({ item }) => {
         <div className='flex items-center'>
           <div className='fixed inset-0 bg-black/80' onClick={() => setShowPopup(false)}/>
 
-          <div className='overflow-auto absolute left-0 right-0 mx-auto w-[50%] z-10 bg-white p-6 rounded-lg flex flex-col justify-center items-center'>
+          <div className='overflow-auto absolute  left-0 right-0 mx-auto w-[90%] md:w-[50%] z-10 bg-white p-6 rounded-lg flex flex-col justify-center items-center'>
 
             <button onClick={() => setShowPopup(false)}
               className='absolute transition-all text-xl text-white top-1 right-1 z-20 p-2 bg-primaryHover rounded-lg hover:scale-110'>

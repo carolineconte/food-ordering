@@ -57,8 +57,6 @@ export async function POST(req) {
     })
   }
 
-
-
   const stripeSession = await stripe.checkout.sessions.create({
     line_items: stripeLineItems,
     mode: 'payment',

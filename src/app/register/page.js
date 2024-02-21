@@ -65,7 +65,7 @@ export default function Register() {
 
   return (
     <section className="flex-grow flex items-center">
-      <form className="flex flex-col gap-2 m-auto w-3/5 max-w-md px-10 py-14 rounded-3xl  bg-secondary shadow-lg"
+      <form className="flex flex-col gap-2 m-auto w-[95%] md:w-3/5 px-10 py-14 rounded-3xl  bg-secondary shadow-lg"
         onSubmit={handleFormSubmit}>
         <h1 className="text-white/90 mb-6 uppercase text-center text-3xl">Registrazione</h1>
         {userCreated && (
